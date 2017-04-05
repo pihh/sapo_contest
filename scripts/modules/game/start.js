@@ -1,45 +1,19 @@
 //inherits from constants @ /SCRIPTS/CONSTANTS.JS
 
 var StartGame = (function(){
-  var endpoint = "";
-
+  var endpoint = jsonp_endpoint;
 
   var startGame = function(){
-    debugger;
     if(!game_running){
       game_running = true;
-
-      $.ajax({
-        url: "https://services.sapo.pt/Codebits/listbadges",
-
-        // The name of the callback parameter, as specified by the YQL service
-        jsonp: "callback",
-
-        // Tell jQuery we're expecting JSONP
-        dataType: "jsonp",
-
-        // Tell YQL what we want and that we want JSON
-        data: {
-    //        q: "select title,abstract,url from search.news where query=\"cat\"",
-            format: "json"
-        },
-
-        // Work with the response
-        success: function( data ) {
-            build_array(data,9);
-            countdown();
-            console.log( data ); // server response
-        }
-
-      });
+      ajax_jsonp(endpoint);
+      // runs callback function @ main.js in the end of this run
     }
   }
 
   // jsonP array shuffle
   var _aux_get_x_elements_from_array = function(arr, x){
     arr = arr.slice(0, x);
-    console.log(arr);
-    debugger;
     return arr;
   }
 
@@ -66,19 +40,18 @@ var StartGame = (function(){
     arr = _aux_shuffle_array(arr);
     arr = _aux_get_x_elements_from_array(arr,9);
     arr = arr.concat(arr);
-    debugger;
     game_cards = _aux_shuffle_array(arr);
   }
 
   //Timmer
   var countdown = function() {
     var el = document.getElementById('counter');
-    var missingTime = parseInt(el.innerHTML, game_counter);
+    var missingTime = game_counter;
 
     var intervalId = setInterval(function() {
       el.innerHTML = --missingTime;
-      if (value === 0) {
-
+      if (missingTime === 0) {
+        endGame();
          clearInterval(intervalId);
       }
     }, 1000);
@@ -90,7 +63,14 @@ var StartGame = (function(){
     alert('Game ended');
   }
 
+  // build , shuffle, start counter, set end function.
+  var run = function(data){
+    build_array(data,9);
+    countdown();
+  }
+
   return {
-    start: startGame
+    start: startGame,
+    run: run
   }
 })();

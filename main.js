@@ -1,3 +1,11 @@
+
+//JSOP callback methos
+function callback(data){
+    StartGame.run(data);
+    console.log( data ); // server response
+}
+
+
 function bootstrap(){
   CacheTemplate.getTemplate('rules');
 

@@ -9,7 +9,14 @@ var CacheTemplate = (function(){
     }
 
     if(!instance.hasOwnProperty('view')){
-      instance.view = $('#render');
+      instance.view = elements.view;
+      /*
+      console.table({
+          'jquery': $('#render'),
+          'js': document.getElementById('render'),
+          'match': $('#render') == document.getElementById('render')
+      });
+      */
     }
 
 
@@ -21,8 +28,9 @@ var CacheTemplate = (function(){
         $.get( endpoint, function(data) {
 
           instance.loadedTemplates[name] = data;
+          instance.view.innerHTML = instance.loadedTemplates[name];
 
-          instance.view.html(instance.loadedTemplates[name]);
+          debugger;
           return instance.loadedTemplates[name];
 
         }).done(function() {
@@ -33,7 +41,7 @@ var CacheTemplate = (function(){
 
         });
       }else{
-        instance.view.html(instance.loadedTemplates[name]);
+        instance.view.innerHTML = instance.loadedTemplates[name];
         return instance.loadedTemplates[name];
       }
 
