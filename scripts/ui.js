@@ -59,12 +59,10 @@ var each = {
 
 //ajax get -> nota, só vou trabalhar com JSON ou texto
 function ajax_get (endpoint, data, callbackFunction){
-  var send = "";
 
   var x = new XMLHttpRequest();
   x.open("GET", endpoint, true);
   x.onreadystatechange = function () {
-
     if (x.readyState == 4 || x.status == 200 && x.responseText){
       _callFunction(callbackFunction,x.responseText);
     }
@@ -75,7 +73,8 @@ function ajax_get (endpoint, data, callbackFunction){
   }
 
   if(data && typeof data == 'object'){ // tem de ser um objecto simples com key pair
-    // falta método para serializar isto no formato a=b mas como n me vejo a fazer muitos requests, vou saltar para já
+    // falta método para passar isto ao formato a=b mas como n me vejo a fazer muitos requests, vou saltar para já
+    var send = "";
     x.send(send);
   }else{
     x.send(null);

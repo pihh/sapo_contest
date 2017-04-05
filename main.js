@@ -32,7 +32,7 @@ function openTab(element){
 
 function bootstrap(){
   document.addEventListener("DOMContentLoaded", function(event) {
-    CacheTemplate.get('rules');
+    CacheTemplate.get('game');
     var elsLen = elements.tabViews.length ,element;
     //Setup clicks and touchstart
     for (var i = 0, len = elsLen; i < len; i++) {
