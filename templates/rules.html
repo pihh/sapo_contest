@@ -1,0 +1,13 @@
+<h1>Indicações: </h1>
+<p>O jogo deverá corre no browser e no inicio deve aparecer um botão "Novo Jogo"</p>
+<p>Quando se clica em "Novo Jogo", é feito um pedido JsonP ao endpoint da API dos "badges" do Codebits (o parâmetro JsonP é "callback") - ver legenda. </p>
+<p>Da resposta, devem ser escolhidos 9 "badges" aleatórios para formar os pares e construir o tabuleiro 6x3 usando a imagem do bot do codebits como "default/costas", mostrando um botão "Iniciar Jogo". </p>
+<p>Quando se clica "Iniciar Jogo" deve ser mostrado um contador que vai contando o tempo até que o jogo seja terminado. </p>
+<p>Para jogar, o jogador vai clicando nos bots para os virar e mostrar as imagens (aos pares) até que todos os pares sejam encontrados. Quando o par virado não for igual este volta à posição inicial. </p>
+<p>Quando o jogador terminar o jogo, o contador deve parar e deve ser mostrado um link para partilhar o tempo do jogo no twitter com a mensagem <cite>"Memory JavaScript FTW em: <tempo do jogo>"</cite> </p>
+
+<h2>Legenda:</h2>
+<p><b>Endpoint da API:</b> https://services.sapo.pt/Codebits/listbadges </p>
+<p><b>Imagem default/costas:</b> https://i2.wp.com/codebits.eu/logos/defaultavatar.jpg </p>
+<p><b>URL de partilha do twitter:</b> https://twitter.com/intent/tweet/?text=<Texto para partilhar></p>
+<p><b>Exemplo de um jogo da memória:</b> http://c1.quickcachr.fotos.sapo.pt/i/o43138c2c/14885783_9Vj9A.png</p>
