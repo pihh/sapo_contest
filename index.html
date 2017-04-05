@@ -24,6 +24,13 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+      if ( 'querySelector' in document && 'addEventListener' in window ) {
+          console.log('Browser OK');
+      }else{
+        alert('Sendo um teste aos meus conhecimentos de Javascript Nativo, decidi escrever este projecto sem libs externas, sendo que desta forma, nem todos os browsers podem eventualmente não suportar o mesmo. O projecto foi testado em Google Chrome 57.0.2987.133 (64-bit), por favor, tente novamente em outro browser. Obrigado.');
+      }
+    </script>
   </head>
 
   <body>
@@ -59,13 +66,18 @@
 
 
     <footer>
+      <!-- Libs -->
       <script src="node_modules/jquery/dist/jquery.min.js"></script>
       <script>window.jQuery || document.write('<script src="node_modules/jquery/dist/jquery.min.js"><\/script>')</script>
       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="scripts/workarounds/ie10-viewport-bug-workaround.js"></script>
 
+      <!-- base components -->
       <script src="scripts/constants.js"></script>
-      <script src="scripts/modules/cache/template/index.js"></script>
+      <script src="scripts/ui.js"></script>
+
+      <!-- App Modules -->
+      <script src="scripts/modules/cache/index.js"></script>
       <script src="scripts/modules/game/start.js"></script>
 
       <!-- Bootstrap the application -->

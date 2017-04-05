@@ -1,17 +1,17 @@
 <div class="col-sm-4">
   <ul>
     <li>
-      <a href="#dev-notes">
+      <a scroll="dev-notes">
         Notas de dev
       </a>
     </li>
     <li>
-      <a href="#user-storys">
+      <a scroll="user-storys">
         User Storiess
       </a>
     </li>
     <li>
-      <a href="#dev-docs">
+      <a scroll="dev-docs">
         Documentação
       </a
     </li>
@@ -28,6 +28,26 @@
 
       <ol>
         <li>Sendo que a entrevista é para programadores de javascript, tentei fugir ao máximo do uso de libs com as quais estou mais confortável. No entanto usei bootstrap e carreguei o jQuery para as funções nativas do mesmo. </li>
+        <li>Sendo que o meu tempo para este exercicio é limitado, preferi sacrificar tempo nestas duas páginas extra ( regras - epico que me foi entregue e documentação- página que uso para descrever passos e factos que assumi para avaliarem melhor o meu desempenho ) e não usei preprocessadores nem task runners para deixar a coisa impecável como gostava.</li>
+        <li>Na &lt;head&gt; pus um pequeno script que verifica se este browser suporta algumas das coisas usadas.
+        <li>Estrutura do projecto:
+          <ul>
+            <li><b>root:</b><br>
+              - ficheiro index.html - dispensa apresentações.
+              - ficheiro main.js - bootstrap da aplicação.
+            <li><b>templates:</b> Ficheiros de template html que são carregados dinamicamente e postos em cache (ficheiro de load e cache: /scripts/modules/cache/template/index.js)</li>
+            <li><b>scripts:</b> Pasta dos ficheiros javascript<br>
+              - constants.js - Ficheiro com as constante da aplicação ( podem ser variaveis ou objectos html)
+              - ui.js - sendo que nao usei jQuery, algumas funcionalidades para atingir o mesmo fim são colocadas aqui neste ficheiro ( ajax, has class, etc);
+              --\warnings: vinha com o ficheiro base do bootstrap (http://getbootstrap.com) - não é da minha autoria
+              --\workarounds: vinha com o ficheiro base do bootstrap (http://getbootstrap.com) - não é da minha autoria
+              --\modules: tentei dividir a aplicação em namespaces para conseguir organizar melhor o meu código e ter ficheiros mais legiveis e mais pequenos. Estes módulos têm comentado na primeira linha as dependencias
+              ----\cache: modulos de cache, não prevejo fazer cache de muito mais coisas para além do template, mesmo depois de já ter estruturado o sistema todo ( antes de o começar a escrever ), no entanto pode fazer sentido mais tarde e não descartei a hipotese;
+              ----\game: modulos do jogo. A aplicação pode complicar-se um pouco se tiver atenção a vários detalhes, assim preferi deixar o projecto o mais segmentado por blocos o possivel.
+            </li>
+          </ul>
+        </li>
+
       </ol>
     </div>
   </div>

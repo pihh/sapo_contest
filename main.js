@@ -5,20 +5,42 @@ function callback(data){
     console.log( data ); // server response
 }
 
+function openTab(element){
+
+  each.array(elements.tabViews, function(element){
+    if(hasClass(element, 'active')){
+      removeClass(element,'active');
+    }
+  });
+
+  addClass(this,'active');
+
+  //get attribute
+  var attr = this.getAttribute('data-template');
+
+  CacheTemplate.get(attr,function(data){
+
+    // add attributes to game html
+    if(attr == 'game' ){
+      if(elements.prototyped.startGame.hasOwnProperty('touchAndClick')){
+        addTouchAndClick(elements.startGame, StartGame.start,'startGame');
+      }
+    }
+
+  });
+}
 
 function bootstrap(){
-  CacheTemplate.getTemplate('rules');
-
-  //Set
-  $('.tab-view').on('click touchstart', function(){
-    $('.tab-view').removeClass('active');
-    $(this).addClass('active');
-    CacheTemplate.getTemplate($(this).attr('data-template'));
+  document.addEventListener("DOMContentLoaded", function(event) {
+    CacheTemplate.get('rules');
+    var elsLen = elements.tabViews.length ,element;
+    //Setup clicks and touchstart
+    for (var i = 0, len = elsLen; i < len; i++) {
+      element = elements.tabViews[i];
+      addTouchAndClick(element,openTab, false);
+    }
   });
 
-  $(document).on('click touchstart','#start-the-game', function(){
-    StartGame.start();
-  });
 }
 
 
