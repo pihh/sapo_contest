@@ -30,13 +30,16 @@ var CacheTemplate;
 
       }
 
-      var getTemplate = function(name){
+      var getTemplate = function(name,callbackFunction){
         var endpoint = 'templates/'+name+'.html';
         CacheTemplate.name = name;
         if(!CacheTemplate.loadedTemplates.hasOwnProperty(name)){
           ajax_get(endpoint,false,CacheTemplate.loadTemplate);
         }else{
           CacheTemplate.view.innerHTML = CacheTemplate.loadedTemplates[name];
+          if(callbackFunction){
+             _callFunction(callbackFunction,{data:CacheTemplate.loadedTemplates[name]});
+           }
           return CacheTemplate.loadedTemplates[name];
         }
       }

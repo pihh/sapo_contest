@@ -4,6 +4,7 @@ var StartGame = (function(){
   var endpoint = jsonp_endpoint;
 
   var startGame = function(){
+    console.log('running start game');
     if(!game_running){
       game_running = true;
       ajax_jsonp(endpoint);

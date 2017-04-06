@@ -1,17 +1,17 @@
 //Not my code
-var hasClass = function (elem, className) {
+function hasClass(elem, className) {
     return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
 }
 
 //Not my code
-var addClass = function (elem, className) {
+function addClass(elem, className) {
     if (!hasClass(elem, className)) {
         elem.className += ' ' + className;
     }
 }
 
 //Not my code
-var removeClass = function (elem, className) {
+function removeClass(elem, className) {
     var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ') + ' ';
     if (hasClass(elem, className)) {
         while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
@@ -22,11 +22,21 @@ var removeClass = function (elem, className) {
 }
 
 //Auxiliares
-_checkIfFunction = function(callbackFunction){
-  return typeof callbackFunction === "function"
+function _checkIfFunction(callbackFunction){
+  if(typeof callbackFunction === "string"){
+    if(callbackFunction.indexOf('.') > -1){
+      var end = 2;
+      var arr = callbackFunction.split(".");
+      //check namespace
+      if(typeof window[arr[0]] === "object" && typeof window[arr[1]] === "function"){
+        return true;
+      }
+    }
+  }
+  return typeof callbackFunction === "function" || typeof window[callbackFunction] === "function";
 }
 
-_callFunction = function(callbackFunction,data){
+function _callFunction (callbackFunction,data){
   if(_checkIfFunction(callbackFunction)){
     callbackFunction.call(callbackFunction,data);
   }else{
@@ -40,7 +50,7 @@ var each = {
   object: function(obj, callbackFunction){
     for (var p in obj) {
       if( obj.hasOwnProperty(p) && _checkIfFunction(callbackFunction)) {
-        _callFunction(callbackFunction,{key:p,pair:obj.p});
+        _callFunction(callbackFunction,{key:p,pair:obj[p]});
       }
     }
   },
@@ -62,6 +72,7 @@ function ajax_get (endpoint, data, callbackFunction){
 
   var x = new XMLHttpRequest();
   x.open("GET", endpoint, true);
+  //x.setRequestHeader('Content-type', 'text/html');
   x.onreadystatechange = function () {
     if (x.readyState == 4 || x.status == 200 && x.responseText){
       _callFunction(callbackFunction,x.responseText);
@@ -82,14 +93,18 @@ function ajax_get (endpoint, data, callbackFunction){
 
 }
 
+function ajax_jsonp(){
+  ajax_get(jsonp_endpoint,false,callback);
+}
+
 // Event Listeners
-var trackPrototypedPropertys = function(name,prop){
+function trackPrototypedPropertys(name,prop){
   if(elements.prototyped[name] && !elements.prototyped[name].hasOwnProperty(prop)){
     elements.prototyped[name][prop] = true;
   }
 }
 
-var addTouchAndClick = function(element,callbackFunction, name){
+function addTouchAndClick(element,callbackFunction, name){
   if(_checkIfFunction(callbackFunction) && element){
     element.addEventListener('click', callbackFunction , element);
     element.addEventListener('touchstart', callbackFunction , element);
@@ -107,4 +122,20 @@ var addTouchAndClick = function(element,callbackFunction, name){
 
     return false;
   }
+}
+
+// tabs
+function openTab(e){
+
+  each.array(document.querySelectorAll('.tab-view'), function(element){
+    if(hasClass(element, 'active')){
+      removeClass(element,'active');
+    }
+  });
+
+  addClass(e,'active');
+
+  //get attribute
+
+  CacheTemplate.get(e.getAttribute('data-template'));
 }
