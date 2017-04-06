@@ -36,6 +36,10 @@ function _checkIfFunction(callbackFunction){
   return typeof callbackFunction === "function" || typeof window[callbackFunction] === "function";
 }
 
+function _isArray(variable){
+  return(Object.prototype.toString.call( variable ) === '[object Array]');
+}
+
 function _callFunction (callbackFunction,data){
   if(_checkIfFunction(callbackFunction)){
     callbackFunction.call(callbackFunction,data);
@@ -68,11 +72,26 @@ var each = {
 
 
 //ajax get -> nota, só vou trabalhar com JSON ou texto
-function ajax_get (endpoint, data, callbackFunction){
+function ajax_get (endpoint, data, callbackFunction,headers){
 
   var x = new XMLHttpRequest();
   x.open("GET", endpoint, true);
-  //x.setRequestHeader('Content-type', 'text/html');
+
+  if(headers){
+    if(typeof headers === 'object'){
+      each.object(headers, function(obj){
+        x.setRequestHeader(obj.key,obj.pair);
+      })
+    }
+
+    if(_isArray(headers)){
+      each.array(headers, function(arr){
+        each.object(arr, function(key,pair){
+          x.setRequestHeader(obj.key,obj.pair);
+        })
+      })
+    }
+  }
   x.onreadystatechange = function () {
     if (x.readyState == 4 || x.status == 200 && x.responseText){
       _callFunction(callbackFunction,x.responseText);

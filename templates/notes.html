@@ -1,17 +1,17 @@
 <div class="col-sm-4">
   <ul>
     <li>
-      <a scroll="dev-notes">
+      <a onclick="Scroll.to('dev-notes')">
         Notas de dev
       </a>
     </li>
     <li>
-      <a scroll="user-storys">
+      <a onclick="Scroll.to('user-stories')">
         User Storiess
       </a>
     </li>
     <li>
-      <a scroll="dev-docs">
+      <a onclick="Scroll.to('dev-docs')">
         Documentação
       </a
     </li>
@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <div class=row>
+  <div class=row id=user-stories>
     <h2>User Stories</h2>
     <p>Usei metodologia ágil para registar os passos pedidos e não me passar nada ao lado.</p>
     <hr>
@@ -76,7 +76,7 @@
     </ol>
   </div>
 
-  <div class=row>
+  <div class=row id=dev-docs>
     <h2>Documentação:</h2>
     <p>Documentação de alguns métodos, sua logica e localização para ser de mais fácil leitura</p>
     <hr>

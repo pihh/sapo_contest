@@ -5,15 +5,12 @@ function callback(data){
     StartGame.run(data);
 }
 
-
+//Start the application
 function bootstrap(){
   document.addEventListener("DOMContentLoaded", function(event) {
-
     CacheTemplate.get('game');
-
   });
-
 }
 
-
+//Bootstrap the application
 bootstrap();

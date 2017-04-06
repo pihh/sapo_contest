@@ -34,7 +34,7 @@ var CacheTemplate;
         var endpoint = 'templates/'+name+'.html';
         CacheTemplate.name = name;
         if(!CacheTemplate.loadedTemplates.hasOwnProperty(name)){
-          ajax_get(endpoint,false,CacheTemplate.loadTemplate);
+          ajax_get(endpoint,false,CacheTemplate.loadTemplate,{key:'Content-type',pair:'text/html'});
         }else{
           CacheTemplate.view.innerHTML = CacheTemplate.loadedTemplates[name];
           if(callbackFunction){
