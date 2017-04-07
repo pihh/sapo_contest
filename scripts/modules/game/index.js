@@ -1,6 +1,6 @@
 //inherits from Constants & globals
 
-var Game = (function(Game, CONST, GLOBALS){
+var Game = (function(Game, CONST, GLOBALS,Aux){
   var endpoint = CONST.get('JSONP_ENDPOINT');
   var elements = GLOBALS.ELEMENTS;
 
@@ -9,11 +9,10 @@ var Game = (function(Game, CONST, GLOBALS){
   }
 
   var startGame = function(){
-    console.log('running start game');
-    if(!game_running){
-      game_running = true;
-      ajax_jsonp(endpoint);
-      // runs callback function @ main.js in the end of this run
+
+    if(!GLOBALS.GAME_RUNNING){
+      GLOBALS.GAME_RUNNING = true;
+      Aux.jsonP(endpoint);
     }
   }
 
@@ -52,7 +51,7 @@ var Game = (function(Game, CONST, GLOBALS){
   //Timmer
   var countdown = function() {
     var el = document.getElementById('counter');
-    var missingTime = game_counter;
+    var missingTime = CONST.get('GAME_COUNTER');
 
     var intervalId = setInterval(function() {
       el.innerHTML = --missingTime;
@@ -65,19 +64,23 @@ var Game = (function(Game, CONST, GLOBALS){
 
 
   var endGame = function(){
-    game_running = false;
-    alert('Game ended');
+      GLOBALS.GAME_RUNNING = false;
+      alert('Game ended');
   }
+
 
   // build , shuffle, start counter, set end function.
   var run = function(data){
+
     build_array(data,9);
     countdown();
+
   }
 
   return {
     start: startGame,
     run: run,
-    init: init
+    init: init,
+    end: endGame
   }
-})(Game || {},CONST, GLOBALS);
+})(Game || {},CONST, GLOBALS, Aux);

@@ -63,7 +63,7 @@ function _callFunction (callbackFunction,data){
     alert(callbackFunction +' is not a function');
   }
 }
-*/
+*
 
 
 //loops
@@ -273,3 +273,4 @@ function ajax(config,successCallback, errorCallback){
 
 
 }
+*/

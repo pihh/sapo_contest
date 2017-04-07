@@ -178,6 +178,28 @@ var Aux = (function(Aux){
 
   }
 
+   var communicator = {
+     iterator: null,// por norma iria fazer um iterador aqui mas neste caso vou usar apenas uma variavel
+     store: function(e){
+       this.iterator = e;
+       console.log(e);
+     },
+     broadcast: function(){
+       var what = this.iterator;
+       this.iterator = null;
+       console.log(what);
+       return what;
+     }
+   }
+
+   var jsonp = function(endpoint){
+
+    var script = document.createElement('script');
+    script.src = endpoint
+
+    document.getElementsByTagName('head')[0].appendChild(script);
+   }
+
   // Reveal
   Aux.ajax = ajax;
   Aux.each = each;
@@ -185,6 +207,8 @@ var Aux = (function(Aux){
   Aux.hasClass = DOM.hasClass;
   Aux.addClass = DOM.addClass;
   Aux.removeClass = DOM.removeClass;
+  Aux.coms = communicator;
+  Aux.jsonP = jsonp;
 
   return Aux;
 

@@ -66,6 +66,28 @@
 
 
     <footer>
+      <!-- Bootstrap modal -->
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title" id=_modal_title>Modal Header</h4>
+            </div>
+            <div class="modal-body" id=_modal_body>
+              <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer" id=_modal_footer>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
       <!-- Libs -->
       <script src="node_modules/jquery/dist/jquery.min.js"></script>
       <script>window.jQuery || document.write('<script src="node_modules/jquery/dist/jquery.min.js"><\/script>')</script>
@@ -82,7 +104,7 @@
       <script src="scripts/modules/cache/index.js"></script>
       <script src="scripts/modules/router/index.js"></script>
       <script src="scripts/modules/game/index.js"></script>
-      <script src="scripts/modules/scroll/index.js"></script>
+      <script src="scripts/modules/ui/index.js"></script>
 
       <!-- Bootstrap the application -->
       <script src="main.js"></script>
