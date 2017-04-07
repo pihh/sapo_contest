@@ -42,12 +42,13 @@ function openTabRun(e){
 function bootstrap(){
 
   //Debug purposes
-  Cache.clear();
+  //Cache.clear();
+  window.location.hash = '';
 
   //Load the game
   document.addEventListener("DOMContentLoaded", function(event) {
     Router.get('game').then(function(){
-
+      console.log('Application loaded')
     });
   });
 }
