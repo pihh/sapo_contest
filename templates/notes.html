@@ -30,24 +30,7 @@
         <li>Sendo que a entrevista é para programadores de javascript, tentei fugir ao máximo do uso de libs com as quais estou mais confortável. No entanto usei bootstrap e carreguei o jQuery para as funções nativas do mesmo. </li>
         <li>Sendo que o meu tempo para este exercicio é limitado, preferi sacrificar tempo nestas duas páginas extra ( regras - epico que me foi entregue e documentação- página que uso para descrever passos e factos que assumi para avaliarem melhor o meu desempenho ) e não usei preprocessadores nem task runners para deixar a coisa impecável como gostava.</li>
         <li>Na &lt;head&gt; pus um pequeno script que verifica se este browser suporta algumas das coisas usadas.
-        <li>Estrutura do projecto:
-          <ul>
-            <li><b>root:</b><br>
-              - ficheiro index.html - dispensa apresentações.
-              - ficheiro main.js - bootstrap da aplicação.
-            <li><b>templates:</b> Ficheiros de template html que são carregados dinamicamente e postos em cache (ficheiro de load e cache: /scripts/modules/cache/template/index.js)</li>
-            <li>
-              <p><b>scripts:</b> Pasta dos ficheiros javascript</p>
-              <p><b>- constants.js -</b> Ficheiro com as constante da aplicação ( podem ser variaveis ou objectos html)</p>
-              <p><b>- ui.js -</b> sendo que nao usei jQuery, algumas funcionalidades para atingir o mesmo fim são colocadas aqui neste ficheiro ( ajax, has class, etc);</p>
-              <p><b>--\warnings:</b> vinha com o ficheiro base do bootstrap (http://getbootstrap.com) - não é da minha autoria</p>
-              <p><b>--\workarounds:</b> vinha com o ficheiro base do bootstrap (http://getbootstrap.com) - não é da minha autoria</p>
-              <p><b>--\modules:</b> tentei dividir a aplicação em namespaces para conseguir organizar melhor o meu código e ter ficheiros mais legiveis e mais pequenos. Estes módulos têm comentado na primeira linha as dependencias</p>
-              <p><b>----\cache:</b> modulos de cache, não prevejo fazer cache de muito mais coisas para além do template, mesmo depois de já ter estruturado o sistema todo ( antes de o começar a escrever ), no entanto pode fazer sentido mais tarde e não descartei a hipotese;</p>
-              <p><b>----\game:</b> modulos do jogo. A aplicação pode complicar-se um pouco se tiver atenção a vários detalhes, assim preferi deixar o projecto o mais segmentado por blocos o possivel.</p>
-            </li>
-          </ul>
-        </li>
+
 
       </ol>
     </div>
@@ -230,7 +213,26 @@
     <p>Documentação de alguns métodos, sua logica e localização para ser de mais fácil leitura</p>
     <hr>
     <ol>
-      <li></li>
+      <li>Estrutura do projecto:
+        <ul>
+          <li><b>root:</b><br>
+            - ficheiro index.html - corre algumas validações do browser.
+            - ficheiro index.js - bootstrap da aplicação + funcões não categorizadas ( que n valia a pena agrupar ).
+          <li><b>templates:</b> Ficheiros de template html que são carregados dinamicamente e postos em cache (ficheiro de load e cache: /scripts/modules/cache/template/index.js)</li>
+          <li>
+            <p><b>scripts:</b> Pasta dos ficheiros javascript</p>
+            <p><b>- constants.js -</b> constantes - variaveis globais ( foi o nome que dei inicialmente pois tencionava encapsular a aplicacao mas não vale a pena)</p>
+            <p><b>--\warnings:</b> vinha com o ficheiro base do bootstrap (http://getbootstrap.com) - não é da minha autoria</p>
+            <p><b>--\workarounds:</b> vinha com o ficheiro base do bootstrap (http://getbootstrap.com) - não é da minha autoria</p>
+            <p><b>--\modules:</b> tentei dividir a aplicação em namespaces para conseguir organizar melhor o meu código e ter ficheiros mais legiveis e mais pequenos. Estes módulos têm comentado na primeira linha as dependencias</p>
+            <p><b>----\cache:</b> Sistema simples para fazer cache da aplicação para não estar a fazer vários pedidos desnecessarios</p>
+            <p><b>----\game:</b> Sistema do jogo</p>
+            <p><b>----\aux:</b> Funções auxiliares ( normalmente as usaria um framework para fazer o trabalho destas)</p>
+            <p><b>----\router:</b> Sistema que carrega as tabs e inicia os métodos de bootstrap do Objecto responsável por elas ( neste caso tab game tem o objecto Game )</p>
+            <p><b>----\ui:</b> Funções de user interface (modal e scroll)</p>
+          </li>
+        </ul>
+      </li>
     </ol>
   </div>
 </div>
