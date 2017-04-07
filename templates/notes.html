@@ -119,10 +119,106 @@
           2- Construir tabuleiro 6x3: Done<br>
           3- Garantir que a imagem default é mostrada: Done<br>
           4- Esconder botão Novo Jogo: Done<br>
+          5- Mostrar botão Iniciar Jogo: Done<br>
         </p>
         <p>
           <b>Métodos:</b><br>
           modules/game/index.js - load();<br>
+        </p>
+        <hr>
+      </li>
+      <!-- User Story 4 -->
+      <li>
+        <cite>
+          <p>
+            <b>I want:</b> Ver contador com o tempo que falta <br>
+            <b>When:</b> Carrego iniciar jogo <br>
+            <b>So that:</b> Consiga saber quanto falta para acabar o desafio <br>
+          </p>
+        </cite>
+        <p>
+          <b>Tasks:</b><br>
+          1- Clicar e iniciar o jogo: Done<br>
+          2- Meter state lock para poder ou n jogar: Done<br>
+          3- Mostrar contador: Done<br>
+          4- Decrementar tempo: Done<br>
+          5- Alerta quando tempo acabou: Done<br>
+          6- Trancar o jogo: Done<br>
+        </p>
+        <p>
+          <b>Métodos:</b><br>
+          modules/game/index.js - run();<br>
+          modules/game/index.js - countdown();<br>
+          modules/game/index.js - load();<br>
+          modules/game/index.js - build_array();<br>
+          modules/game/index.js - loadTable();<br>
+          modules/game/index.js - endGame();<br>
+        </p>
+        <hr>
+      </li>
+      <!-- User Story 5 -->
+      <li>
+        <cite>
+          <p>
+            <b>I want:</b> Virar carta <br>
+            <b>When:</b> Carrego na carta <br>
+            <b>So that:</b> Possa compará-la<br>
+          </p>
+          <p>
+            <b>I want:</b> Trancar a carta  <br>
+            <b>When:</b> Carreguei em duas identicas <br>
+            <b>So that:</b> Fique com menos cartas por ver<br>
+          </p>
+          <p>
+            <b>I want:</b> Ganhar o jogo <br>
+            <b>When:</b> Ter todos os pares virados <br>
+            <b>So that:</b> Passe á proxima fase<br>
+          </p>
+        </cite>
+        <p>
+          <b>Tasks:</b><br>
+          1- Clicar e virar carta: Done<br>
+          2- Clicar e mudar imagem da carta: Done<br>
+          3- Validar duas cartas: Done <br>
+          4- Track de quantas cartas tem para clicar: Done <br>
+          5- Rollback caso não haja match: Done <br>
+          6- Remover listeners das cartas que ja foram usadas: Done<br>
+          7- Função de sucesso caso o user ganhe o jogo: Done<br>
+          7- Remover o botão iniciar jogo: Done<br>
+        </p>
+        <p>
+          <b>Métodos:</b><br>
+          modules/game/index.js - endGame();<br>
+          modules/game/index.js - clickCard();<br>
+          modules/game/index.js - swipeCard();<br>
+          modules/game/index.js - matchCards();<br>
+          modules/game/index.js - foundMatch();<br>
+          modules/game/index.js - rollback();<br>
+          modules/game/index.js - swipeCard();<br>
+        </p>
+        <hr>
+      </li>
+      <!-- User Story 6 -->
+      <li>
+        <cite>
+          <p>
+            <b>I want:</b> Parar contador, apresentar mensagem com o link  <br>
+            <b>When:</b> Ganho o jogo <br>
+            <b>So that:</b> Partihar isto<br>
+          </p>
+        </cite>
+        <p>
+          <b>Tasks:</b><br>
+          1- Parar contador: Done<br>
+          2- Mostrar mensagem: Done<br>
+          3- Clicar no link: Done <br>
+          4- Partilhar tempo: Done <br>
+        </p>
+        <p>
+          <b>Métodos:</b><br>
+          modules/game/index.js - endGame();<br>
+          modules/game/index.js - clickCard();<br>
+          modules/game/index.js - swipeCard();<br>
         </p>
         <hr>
       </li>

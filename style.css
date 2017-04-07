@@ -10,18 +10,19 @@ body {
   display:none;
 }
 
-#counter{
-  text-align: center;
-}
-
-.game-cards{
-  background: url('https://i2.wp.com/codebits.eu/logos/defaultavatar.jpg');
+.game-cards, .unlocked-game-cards{
   background-size: cover;
   width: 16,6%;
   padding-bottom: 15.15%; /* = width for a square aspect ratio */
   border:1px solid #FFF;
 
 }
+
+.game-cards{
+    background: url('https://i2.wp.com/codebits.eu/logos/defaultavatar.jpg');
+    background-size: cover;
+}
+
 
 .btn-danger{
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e51e04+0,ce0404+44,ba0000+100 */

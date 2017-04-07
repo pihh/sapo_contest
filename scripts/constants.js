@@ -1,9 +1,10 @@
 var CONST = (function() {
      var private = {
-         'GAME_COUNTER': 10,
+         'GAME_COUNTER': 10000000000,
          'JSONP_ENDPOINT': 'https://services.sapo.pt/Codebits/listbadges/?callback=callback',
          'MODAL_ID': 'myModal',
-         'DEFAULT_BACK_IMAGE': 'https://i2.wp.com/codebits.eu/logos/defaultavatar.jpg'
+         'DEFAULT_BACK_IMAGE': 'https://i2.wp.com/codebits.eu/logos/defaultavatar.jpg',
+         'MANY_CARDS': 18
      };
 
      return {

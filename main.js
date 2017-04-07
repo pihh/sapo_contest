@@ -52,15 +52,5 @@ function bootstrap(){
   });
 }
 
-/*
-Aux.ajax({
-  headers: {},
-  //params: {'callback':'callback'},
-  endpoint: 'https://services.sapo.pt/Codebits/listbadges/'
-},callback,function(error){
-  console.log(error);
-});
-*/
-
 //Bootstrap the application
 bootstrap();
