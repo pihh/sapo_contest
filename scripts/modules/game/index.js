@@ -5,7 +5,9 @@ var Game = (function(Game, CONST, GLOBALS,Aux){
   var elements = GLOBALS.ELEMENTS;
 
   var init = function(){
-    console.log('initializing the game');
+    var el = GLOBALS.ELEMENTS.COUNTER;
+    var missingTime = CONST.get('GAME_COUNTER');
+    el.innerHTML = missingTime;
   }
 
   var startGame = function(){
@@ -50,7 +52,7 @@ var Game = (function(Game, CONST, GLOBALS,Aux){
 
   //Timmer
   var countdown = function() {
-    var el = document.getElementById('counter');
+    var el = GLOBALS.ELEMENTS.COUNTER;
     var missingTime = CONST.get('GAME_COUNTER');
 
     var intervalId = setInterval(function() {

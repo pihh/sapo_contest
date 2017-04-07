@@ -14,5 +14,6 @@ var GLOBALS = {
   GAME_RUNNING: false,
   ELEMENTS: {
     VIEW: document.getElementById('render'),// constante
+    COUNTER: document.getElementById('counter'),
   }
 }

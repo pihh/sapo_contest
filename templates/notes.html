@@ -58,6 +58,7 @@
     <p>Usei metodologia ágil para registar os passos pedidos e não me passar nada ao lado.</p>
     <hr>
     <ol>
+      <!-- User Story 1 -->
       <li>
         <cite>
           <p>
@@ -71,6 +72,36 @@
         <p>
           <b>Tasks:</b><br>
           1- Carregar página do jogo no inicio: Done<br>
+        </p>
+        <p>
+          <b>Métodos:</b><br>
+          main.js - bootstrap(); Corre a aplicação. Carrega o módulo de rotas que por sua vez carrega/guarda em cache a rota "game" e corre o método init do modulo Game;<br>
+          modules/router/index.js - get(); <br>
+          modules/cache/index.js - setItem();<br>
+          modules/game/index.js - init();<br>
+        </p>
+      </li>
+      <!-- User Story 2 -->
+      <li>
+        <cite>
+          <p>
+            <b>As a:</b> User <br>
+            <b>I want:</b> Buscar informação jsonP <br>
+            <b>When:</b> Clico no botão Novo Jogo <br>
+            <b>So that:</b> Consiga iniciar o desafio <br>
+          </p>
+        </cite>
+        <hr>
+        <p>
+          <b>Tasks:</b><br>
+          1- Garantir que o botão tem o texto certo: Done<br>
+          2- Ao clicar fazer chamada jsonP: Done<br>
+        </p>
+        <p>
+          <b>Métodos:</b><br>
+          main.js - callback(); Método callback para disparar jsonP<br>
+          modules/aux/index.js - jsonp(); <br>
+          modules/game/index.js - start();<br>
         </p>
       </li>
     </ol>
