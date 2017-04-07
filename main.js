@@ -1,8 +1,7 @@
 
 //JSOP callback methos
 function callback(data){
-    console.log(data);
-    Game.run(data);
+    Game.load(data);
 }
 
 function openTab(e){
