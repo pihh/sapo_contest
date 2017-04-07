@@ -5,13 +5,16 @@ var Game = (function(Game, CONST, GLOBALS,Aux){
   var elements = GLOBALS.ELEMENTS;
 
   var init = function(){
-    var el = GLOBALS.ELEMENTS.COUNTER;
+    var el = GLOBALS.ELEMENTS.COUNTER();
     var missingTime = CONST.get('GAME_COUNTER');
     el.innerHTML = missingTime;
+
+    document.getElementById('start-the-game').style.display = "block";
+    document.getElementById('board').style.display = "hidden";
+    document.getElementById('run-the-game').style.display = "hidden";
   }
 
   var startGame = function(){
-
     if(!GLOBALS.GAME_RUNNING){
       GLOBALS.GAME_RUNNING = true;
       Aux.jsonP(endpoint);
@@ -48,11 +51,12 @@ var Game = (function(Game, CONST, GLOBALS,Aux){
     arr = _aux_get_x_elements_from_array(arr,9);
     arr = arr.concat(arr);
     game_cards = _aux_shuffle_array(arr);
+    console.log(game_cards);
   }
 
   //Timmer
   var countdown = function() {
-    var el = GLOBALS.ELEMENTS.COUNTER;
+    var el = GLOBALS.ELEMENTS.COUNTER();
     var missingTime = CONST.get('GAME_COUNTER');
 
     var intervalId = setInterval(function() {
@@ -70,17 +74,40 @@ var Game = (function(Game, CONST, GLOBALS,Aux){
       alert('Game ended');
   }
 
+  // funcões do load
+  var loadTable = function(){
+      var board = document.getElementById('board');
+      var i = 0;
+      // dispor tabuleiros
+      Aux.each.array(game_cards,function(obj){
+        var div = document.createElement('div');
+        div.innerHTML = '<div class="col col-xs-2 card-background id=game-card-'+i+' game-cards" data-index='+i+'></div>';
+        board.appendChild(div);
+
+        i++;
+      });
+      // esconder e fazer aparecer butoes
+      document.getElementById('start-the-game').style.display = "none";
+      board.style.display = "block";
+      document.getElementById('run-the-game').style.display = "block";
+  }
 
   // build , shuffle, start counter, set end function.
-  var run = function(data){
+  var load = function(data){
 
     build_array(data,9);
-    countdown();
+    loadTable();
+    //countdown();
+
+  }
+
+  var run = function(){
 
   }
 
   return {
     start: startGame,
+    load: load,
     run: run,
     init: init,
     end: endGame

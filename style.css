@@ -5,3 +5,31 @@ body {
   padding: 40px 15px;
   text-align: left;
 }
+
+#run-the-game, #board{
+  display:none;
+}
+
+#counter{
+  text-align: center;
+}
+
+.game-cards{
+  background: url('https://i2.wp.com/codebits.eu/logos/defaultavatar.jpg');
+  background-size: cover;
+  width: 16,6%;
+  padding-bottom: 15.15%; /* = width for a square aspect ratio */
+  border:1px solid #FFF;
+
+}
+
+.btn-danger{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e51e04+0,ce0404+44,ba0000+100 */
+  background: #e51e04; /* Old browsers */
+  background: -moz-linear-gradient(top, #e51e04 0%, #ce0404 44%, #ba0000 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #e51e04 0%,#ce0404 44%,#ba0000 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #e51e04 0%,#ce0404 44%,#ba0000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e51e04', endColorstr='#ba0000',GradientType=0 ); /* IE6-9 */
+  border:1px solid #ba0000;
+  text-shadow: 0 0 1 #ba0000;
+}
