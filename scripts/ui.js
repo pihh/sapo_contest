@@ -1,4 +1,5 @@
 //Not my code
+/*
 function hasClass(elem, className) {
     return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
 }
@@ -21,8 +22,9 @@ function removeClass(elem, className) {
     }
 }
 
+*
 //Auxiliares
-function _checkIfFunction(callbackFunction){
+function _isFunction(callbackFunction){
   if(typeof callbackFunction === "string"){
     if(callbackFunction.indexOf('.') > -1){
       var end = 2;
@@ -36,30 +38,48 @@ function _checkIfFunction(callbackFunction){
   return typeof callbackFunction === "function" || typeof window[callbackFunction] === "function";
 }
 
+function _returnObjType(variable){
+  return Object.prototype.toString.call( variable );
+}
+
+function _isAux(variable,type){
+  return(_returnObjType(variable) === '[object '+type+']');
+}
+
 function _isArray(variable){
-  return(Object.prototype.toString.call( variable ) === '[object Array]');
+  //return(Object.prototype.toString.call( variable ) === '[object Array]');
+  return _isAux(variable,'Array');
+}
+
+function _isObject(variable){
+  //console.log(Object.prototype.toString.call(variable) === '[object Object]');
+  return _isAux(variable,'Object');
 }
 
 function _callFunction (callbackFunction,data){
-  if(_checkIfFunction(callbackFunction)){
+  if(_isFunction(callbackFunction)){
     callbackFunction.call(callbackFunction,data);
   }else{
     alert(callbackFunction +' is not a function');
   }
 }
+*/
 
 
 //loops
 var each = {
   object: function(obj, callbackFunction){
     for (var p in obj) {
-      if( obj.hasOwnProperty(p) && _checkIfFunction(callbackFunction)) {
-        _callFunction(callbackFunction,{key:p,pair:obj[p]});
+      if( obj.hasOwnProperty(p) && _isFunction(callbackFunction)) {
+        _callFunction(callbackFunction,{
+          key: p,
+          pair: obj[p]
+        });
       }
     }
   },
   array: function(arr, callbackFunction){
-    if( _checkIfFunction(callbackFunction)) {
+    if( _isFunction(callbackFunction)) {
       arr.forEach(function(a){
         _callFunction(callbackFunction,a);
       });
@@ -124,7 +144,7 @@ function trackPrototypedPropertys(name,prop){
 }
 
 function addTouchAndClick(element,callbackFunction, name){
-  if(_checkIfFunction(callbackFunction) && element){
+  if(_isFunction(callbackFunction) && element){
     element.addEventListener('click', callbackFunction , element);
     element.addEventListener('touchstart', callbackFunction , element);
     if(name){ // adiciona o prototype do click ao elemento para n tentar fazer bind 50 mil x.
@@ -157,4 +177,99 @@ function openTab(e){
   //get attribute
 
   CacheTemplate.get(e.getAttribute('data-template'));
+}
+
+//ajax try
+
+function ajax(config,successCallback, errorCallback){
+  this.data = null;
+  this.config = {};
+  var states = {
+    finally:{
+      set: false,
+      callback:false
+    }
+  }
+  this.req = new XMLHttpRequest();
+
+  var method = "GET"; // metodo base
+  var methods = ["GET","POST"]; // metodos disponiveis - n deve ser preciso
+
+  buildConfig = function(self){
+    if(!config || !config.endpoint){
+      alert('Para correr ajax é preciso existir um objecto de configuração e esse objecto ter uma key endpoint com um endpoint');
+    }
+
+    if(config.method && methods.indexOf(config.method.toUpperCase())){
+      method = config.method.toUpperCase();
+    }
+
+    // meter parametros
+    if(config.params && _isObject(config.params)){
+       var count = 0;
+       each.object(config.params, function(obj){
+         // nota, não estou a construir um framework portanto não vou serializar isto
+         if(0 === count) {
+           config.endpoint += '?'+obj.key+'='+obj.pair;
+         }else{
+           config.endpoint += '&'+obj.key+'='+obj.pair;
+         }
+         count++;
+       });
+    }
+
+    // Abrir o request
+    self.req.open(method, config.endpoint, true);
+
+    // meter headers depois de aberto
+    if(config.headers && _isObject(config.headers)){
+        each.object(config.headers, function(obj){
+          self.req.setRequestHeader(obj.key,obj.pair);
+        });
+    }
+
+  }
+
+  buildConfig(this);
+
+  this.req.onreadystatechange = function () {
+
+    if (this.readyState == 4){
+        if(this.status == 200 && this.responseText){
+          if(_isFunction(successCallback)){
+            _callFunction(successCallback,this.responseText);
+          }
+          //console.log('success');
+        };
+
+        if(states.finally.set){
+          if(_isFunction(states.finally.callback)){
+            _callFunction(states.finally.callback,this.req.responseText || false);
+          }
+          //console.log('finally');
+        }
+
+        //tracking 201 porque não tenciono ter outros que não 200 por aqui.
+        if(this.status > 201){
+          alert('Falha ao carregar xhr no endpoint: '+ config.endpoint + ' com status code: ' + this.status);
+
+          if(_isFunction(errorCallback)){
+            _callFunction(errorCallback,this.data);
+          }
+        }
+    }
+
+
+  }
+
+  this.finally = function(callbackFunction){
+    states.finally.set = true;
+    states.finally.callback = callbackFunction;
+  }
+
+  this.req.send(null);
+
+  return this;
+
+
 }

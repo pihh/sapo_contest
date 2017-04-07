@@ -1,56 +1,51 @@
-var CacheTemplate;
+var Cache = (function(Cache){
 
-(function(){
+  Cache._storage = {};
+  Cache._storageType = "none"; // none, sessionStorage
 
-    if(!CacheTemplate){
-      CacheTemplate = {};
-      CacheTemplate.name = '';
+  function bootstrap(){
+    // Não estamos a fazer um framework portanto não vou configurar uma coisa muito simples
+    if(undefined !== window.sessionStorage){
+      Cache._storageType = "sessionStorage";
+    }
 
-      if(!CacheTemplate.hasOwnProperty('loadedTemplates')){
-        CacheTemplate.loadedTemplates = [];
-      }
-
-      if(!CacheTemplate.hasOwnProperty('view')){
-        CacheTemplate.view = elements.view;
-        /*
-        console.table({
-            'jquery': $('#render'),
-            'js': document.getElementById('render'),
-            'match': $('#render') == document.getElementById('render')
-        });
-        */
-      }
-
-      var loadTemplate = function(data){
-
-        CacheTemplate.loadedTemplates[CacheTemplate.name] = data;
-        CacheTemplate.view.innerHTML = CacheTemplate.loadedTemplates[CacheTemplate.name];
-
-        return CacheTemplate.loadedTemplates[CacheTemplate.name];
-
-      }
-
-      var getTemplate = function(name,callbackFunction){
-        var endpoint = 'templates/'+name+'.html';
-        CacheTemplate.name = name;
-        if(!CacheTemplate.loadedTemplates.hasOwnProperty(name)){
-          ajax_get(endpoint,false,CacheTemplate.loadTemplate,{key:'Content-type',pair:'text/html'});
-        }else{
-          CacheTemplate.view.innerHTML = CacheTemplate.loadedTemplates[name];
-          if(callbackFunction){
-             _callFunction(callbackFunction,{data:CacheTemplate.loadedTemplates[name]});
-           }
-          return CacheTemplate.loadedTemplates[name];
+    // Nota: não meti aqui json parses nem isso porque nao tenciono guardar objectos
+    switch(Cache._storageType){
+      case "sessionStorage":
+        Cache.get = function(key){
+          return sessionStorage.getItem(key);
         }
-      }
+        Cache.set = function(key,pair){
+          return sessionStorage.setItem(key,pair);
+        }
+        Cache.delete = function(key){
+          return sessionStorage.removeItem(key);
+        }
+        Cache.clear = function(){
+          sessionStorage.clear();
+        }
+      break;
+      default:
+        Cache.get = function(key){
+          return Cache._storage[key] || undefined;
+        }
+        Cache.set = function(key,pair){
+          return Cache._storage[key] = pair;
+        }
+        Cache.delete = function(key){
+            delete Cache._storage[key];
+        }
+        Cache.clear = function(){
+          //
+        }
+      break;
+    }
+  }
 
-      CacheTemplate.get = getTemplate;
-      CacheTemplate.loadTemplate = loadTemplate;
+  if(!Cache.hasOwnProperty('get')){
+    bootstrap();
+  }
 
-      return CacheTemplate;
 
-    }else{
-      return CacheTemplate;
-    };
-
-})();
+  return Cache;
+})(Cache || {});

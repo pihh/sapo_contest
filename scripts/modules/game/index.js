@@ -1,7 +1,12 @@
-//inherits from constants @ /SCRIPTS/CONSTANTS.JS
+//inherits from Constants & globals
 
-var StartGame = (function(){
-  var endpoint = jsonp_endpoint;
+var Game = (function(Game, CONST, GLOBALS){
+  var endpoint = CONST.get('JSONP_ENDPOINT');
+  var elements = GLOBALS.ELEMENTS;
+
+  var init = function(){
+    console.log('initializing the game');
+  }
 
   var startGame = function(){
     console.log('running start game');
@@ -72,6 +77,7 @@ var StartGame = (function(){
 
   return {
     start: startGame,
-    run: run
+    run: run,
+    init: init
   }
-})();
+})(Game || {},CONST, GLOBALS);
